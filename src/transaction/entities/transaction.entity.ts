@@ -11,9 +11,9 @@ export class Transaction {
   @Column('decimal', { precision: 10, scale: 2 })
   amount: number;
 
-  @Column()
-  description: string;
+  // @Column()
+  // description: string;
 
-  @Column()
-  date: Date;
+  // @Column()
+  // date: Date;
 }
