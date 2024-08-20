@@ -4,7 +4,7 @@ import { TransactionDto } from '../dto/transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(private readonly transactionsService: TransactionsService) {}
+  constructor(private readonly transactionsService: TransactionsService) { }
 
   @Post()
   async create(@Body() transactionDto: TransactionDto) {
@@ -52,9 +52,10 @@ export class TransactionsController {
     }
   }
 
-  @Get('summary')
+  @Get('summary/all')
   async getBudgetSummary() {
     try {
+
       return await this.transactionsService.getBudgetSummary();
     } catch (error) {
       throw new HttpException('Erreur lors de la récupération du résumé du budget', HttpStatus.INTERNAL_SERVER_ERROR);

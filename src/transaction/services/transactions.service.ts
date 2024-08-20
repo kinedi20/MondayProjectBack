@@ -9,7 +9,7 @@ export class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
     private transactionsRepository: Repository<Transaction>,
-  ) {}
+  ) { }
 
   async create(transactionDto: TransactionDto): Promise<Transaction> {
     const transaction = this.transactionsRepository.create(transactionDto);
@@ -43,12 +43,19 @@ export class TransactionsService {
 
   async getBudgetSummary() {
     const transactions = await this.findAll();
+    console.log('transactions', transactions);
+
     const totalIncome = transactions
       .filter(t => t.type === 'income')
       .reduce((sum, t) => sum + Number(t.amount), 0);
+    console.log('totalIncome', totalIncome);
+
     const totalExpenses = transactions
       .filter(t => t.type === 'expense')
       .reduce((sum, t) => sum + Number(t.amount), 0);
+
+    console.log('totalExpenses', totalExpenses);
+
     const remainingBudget = totalIncome - totalExpenses;
 
     return {
